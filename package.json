@@ -1,0 +1,22 @@
+{
+  "name": "Cyclops",
+  "version": "0.0.0",
+  "description": "Object.observe wrapper",
+  "repository" :
+  { 
+    "type" : "git",
+    "url" : "http://github.com/TheEskhaton/Cyclops.git"
+  },
+  "main": "cyclops.js",
+  "devDependencies": {
+    "mocha": "~1.17.0",
+    "sinon": "~1.7.3",
+    "chai": "~1.8.1"
+  },
+  "scripts": {
+    "test": "node --harmony test_runner.js"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+   "engine": "node 0.11.x"
+}
