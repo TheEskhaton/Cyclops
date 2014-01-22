@@ -6,6 +6,7 @@ var Cyclops = function(obj){
 	}
 	var _obj = obj;
 	var _observers = new Map();
+	var _observerWrappers = new Map();
 	var _inactive = new Set();
 	self.observe = function(name, cb){
 		if(!cb){
@@ -22,9 +23,11 @@ var Cyclops = function(obj){
 				cb(change);
 			}
 		});
-		Object.observe(_obj, function(changes){
+		var observerWrapper = function(changes){
 			changes.forEach(_observers.get(name));
-		});
+		};
+		_observerWrappers.set(name, observerWrapper);
+		Object.observe(_obj, observerWrapper);
 	};
 	self.deactivate = function(name){
 		if(!_observers.has(name)){
@@ -38,7 +41,8 @@ var Cyclops = function(obj){
 			throw new Error("No observer with the name "+name + " was provided");
 		}
 
-		Object.unobserve(_obj, _observers.get(name));
+		Object.unobserve(_obj, _observerWrappers.get(name));
+		_observerWrappers.delete(name);
 		_observers.delete(name);
 	};
 	return self;

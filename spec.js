@@ -55,8 +55,8 @@ describe('Cyclops', function(){
 			var watcher = sinon.spy();
 			c.observe('watcher', watcher);
 			c.unobserve('watcher');
+			testObj.testProp = 'value4';
 			setImmediate(function(){
-				testObj.testProp = 'value4';
 				expect(watcher.callCount).to.equal(0);
 				done();
 			});
