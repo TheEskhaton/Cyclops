@@ -26,14 +26,19 @@ var Cyclops = function(obj){
 			changes.forEach(_observers.get(name));
 		});
 	};
-	self.unobserve = function(name){
+	self.deactivate = function(name){
 		if(!_observers.has(name)){
 			throw new Error("No observer with the name "+name + " was provided");
 		}
 		_inactive.add(name);
 	};
 
-	self.deleteObserver = function(name){
+	self.unobserve = function(name){
+		if(!_observers.has(name)){
+			throw new Error("No observer with the name "+name + " was provided");
+		}
+
+		Object.unobserve(_obj, _observers.get(name));
 		_observers.delete(name);
 	};
 	return self;

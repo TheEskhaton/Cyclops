@@ -24,7 +24,7 @@ describe('Cyclops', function(){
 		it('should observe if re-activated without callback', function(done){
 			var watcher = sinon.spy();
 			c.observe('watcher', watcher);
-			c.unobserve('watcher');
+			c.deactivate('watcher');
 			c.observe('watcher');
 			testObj.testProp = 'value3';
 			setImmediate(function(){
@@ -39,24 +39,24 @@ describe('Cyclops', function(){
 			expect(throwErr).to.throw(Error);
 		});
 	});
-	describe('#unobserve', function(){
+	describe('#deactivate', function(){
 		it('should unobserve existing observers', function(done){
 			var watcher = sinon.spy();
 			c.observe('watcher', watcher);
-			c.unobserve('watcher');
+			c.deactivate('watcher');
 			setImmediate(function(){
 				expect(watcher.callCount).to.equal(0);
 				done();
 			});
 		});
 	});
-	describe('#deleteObserver', function(){
+	describe('#unobserve', function(){
 		it('should delete observers', function(done){
 			var watcher = sinon.spy();
 			c.observe('watcher', watcher);
-			c.deleteObserver('watcher');
-			testObj.testProp = 'value4';
+			c.unobserve('watcher');
 			setImmediate(function(){
+				testObj.testProp = 'value4';
 				expect(watcher.callCount).to.equal(0);
 				done();
 			});
