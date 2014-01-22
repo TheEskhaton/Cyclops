@@ -15,6 +15,6 @@ var c = new Cyclops(testObj);
 c.observe('watcherName', function(change){
 	//Object.observe callback with native "change" object
 });
-c.unobserve('watcherName'); // temporarily disables watcherName observer
+c.deactivate('watcherName'); // temporarily disables watcherName observer
 c.observe('watcherName'); // activates the watcherName observer
-c.deleteObserver('watcherName'); //deletes the watcherName observer (c.observe('watcherName') throws error)
+c.unobserve('watcherName'); //deletes the watcherName observer (c.observe('watcherName') throws error)
