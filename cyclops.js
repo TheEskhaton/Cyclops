@@ -48,7 +48,7 @@ var Cyclops = function(obj){
 	return self;
 };
 
-if(module){
+if(typeof module !== 'undefined'){
 	module.exports = Cyclops;
 }
 else{
